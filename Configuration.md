@@ -50,4 +50,6 @@ Loads [DarkDex](https://github.com/xb3rlinz/infiniteyieldbackup) — a game expl
 _G.notification = true
 _G.loadinfy     = true
 _G.loaddex      = true
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
 ```
