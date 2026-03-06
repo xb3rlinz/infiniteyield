@@ -5,7 +5,7 @@ Set these globals **before** running the script to control its behavior.
 ```lua
 _G.notification = true   -- default
 _G.silentload   = false  -- default
-_G.loadinfy     = true  -- default
+_G.loadinfy     = true   -- default
 _G.loadexec     = false  -- default
 _G.loaddex      = false  -- default
 ```
