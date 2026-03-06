@@ -1,7 +1,9 @@
 local infylogic = (_G.loadinfy or _G.loadinfytest) or not (_G.loaddex or _G.loadexec)
+local notified = false
 
 local function notifyLoaded()
-    if not _G.notification then return end
+    if notified or not _G.notification then return end
+    notified = true
     local parts = {}
     if infylogic then parts[#parts + 1] = "Infy" end
     if _G.loaddex then parts[#parts + 1] = "DarkDex" end
