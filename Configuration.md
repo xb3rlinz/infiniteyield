@@ -15,7 +15,6 @@ _G.loaddex      = false  -- default
 ## Keys
 
 ### `_G.notification`
-**Type:** `boolean` | **Default:** `true`
 
 Whether to show a notification when scripts finish loading. The notification lists every module that was loaded (e.g. `"Infy & DarkDex Loaded!"`).
 
@@ -24,14 +23,12 @@ Set to `false` to suppress all load notifications.
 ---
 
 ### `_G.silentload`
-**Type:** `boolean` | **Default:** `false`
 
 Loads scripts silently without triggering any extra UI or side effects from the loader itself.
 
 ---
 
 ### `_G.loadinfy`
-**Type:** `boolean` | **Default:** `false`
 
 Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield) — a feature-rich admin command script.
 
@@ -40,21 +37,18 @@ Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield) — a feature-
 ---
 
 ### `_G.loadinfytest`
-**Type:** `boolean` | **Default:** `false`
 
 Loads the test/development branch of Infinite Yield instead of the stable release. Takes priority over `_G.loadinfy` if both are set.
 
 ---
 
 ### `_G.loadexec`
-**Type:** `boolean` | **Default:** `false`
 
 Loads the executor module from the backup repository.
 
 ---
 
 ### `_G.loaddex`
-**Type:** `boolean` | **Default:** `false`
 
 Loads [DarkDex](https://github.com/xb3rlinz/infiniteyieldbackup) — a game explorer and instance viewer.
 
