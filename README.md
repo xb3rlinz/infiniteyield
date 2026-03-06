@@ -12,7 +12,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 
 ## Contributors
 
-### - [Berlin](https://github.com/xb3rlinz)
+- [Berlin](https://github.com/xb3rlinz)
 
 ## OG Developers
 
