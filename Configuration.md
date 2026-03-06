@@ -18,7 +18,7 @@ Shows a notification when scripts are done loading, listing what was loaded (e.g
 ### `_G.silentload`
 **Default:** `false`
 
-Suppresses any UI or side effects from the loader.
+Automatically hides IY when executed.
 
 ---
 ### `_G.loadinfy`
@@ -36,20 +36,20 @@ Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if bo
 ### `_G.loadexec`
 **Default:** `false`
 
-Loads in-game executor.
+Loads in-game [executor](https://github.com/xb3rlinz/infiniteyieldbackup/blob/main/executor.lua).
 
 ---
 ### `_G.loaddex`
 **Default:** `false`
 
-Loads [DarkDex](https://github.com/xb3rlinz/infiniteyieldbackup) — a game explorer and instance viewer.
+Loads [DarkDex](https://github.com/xb3rlinz/infiniteyieldbackup/blob/main/dex.lua) — a game explorer and instance viewer.
 
 ---
 ## Example
 ```lua
 _G.notification = true
-_G.loadinfy     = true
 _G.loaddex      = true
+_G.silentload   = true
 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
 ```
