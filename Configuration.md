@@ -27,7 +27,7 @@ Suppresses any UI or side effects from the loader.
 Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield)
 
 ---
-### `_G.loadinfytest`
+### `_G.loadinfytest` (not recommended, buggy)
 **Default:** `false`
 
 Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if both are set.
