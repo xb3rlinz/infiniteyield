@@ -21,16 +21,16 @@ Shows a notification when scripts are done loading, listing what was loaded (e.g
 Automatically hides IY when executed.
 
 ---
-### `_G.loadinfy`
-**Default:** `true`
-
-Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield)
-
----
 ### `_G.loadinfytest` (not recommended)
 **Default:** `false`
 
 Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if both are set.
+
+---
+### `_G.loadinfy`
+**Default:** `true`
+
+Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield)
 
 ---
 ### `_G.loadexec`
