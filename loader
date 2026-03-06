@@ -1,42 +1,39 @@
-local loadinfy, loadinfytest, loaddex, loadexec, disnoti
-local infylogic = (loadinfy loadinfytest) or not (loaddex or loadexec)
+local notification  = _G.notification
+local loadinfy      = _G.loadinfy
+local loadinfytest  = _G.loadinfytest
+local loadexec      = _G.loadexec
+local loaddex       = _G.loaddex
+local infylogic     = (loadinfy or loadinfytest) or not (loaddex or loadexec)
+
+local function notifyLoaded()
+    if not notification then return end
+    local parts = {}
+    if infylogic then parts[#parts + 1] = "Infy" end
+    if loaddex    then parts[#parts + 1] = "DarkDex" end
+    if loadexec   then parts[#parts + 1] = "Exec" end
+    if #parts > 0 then notify(table.concat(parts, " & ") .. " Loaded!") end
+end
 
 if infylogic then
-    if loadinfytest and not loadinfy then
-        pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/test"))()
-        end)
-    else
-        pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/source"))()
-        end)   
-    end
+    pcall(function()
+        local url = (loadinfytest and not loadinfy)
+            and "https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/test"
+            or  "https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/source"
+        loadstring(game:HttpGet(url))()
+        notifyLoaded()
+    end)
 end
+
 if loadexec then
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/executor.lua"))()
-    end)
-end
-if loaddex then
-    pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/dex.lua"))()
+        notifyLoaded()
     end)
 end
 
-if not disnoti then
-    if infylogic and loaddex and loadexec then
-        notify('All Loaded!')
-    elseif infylogic and loaddex then
-        notify('Infy & DarkDex Loaded!')
-    elseif infylogic and loadexec then
-        notify('Infy & Exec Loaded!')
-    elseif loaddex and loadexec then
-        notify('DarkDex & Exec Loaded!')
-    elseif infylogic then
-        notify('Infy Loaded!')
-    elseif loaddex then
-        notify('DarkDex Loaded!')
-    elseif loadexec then
-        notify('Exec Loaded!')
-    end
+if loaddex then
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/dex.lua"))()
+        notifyLoaded()
+    end)
 end
