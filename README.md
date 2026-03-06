@@ -20,4 +20,4 @@ You can learn how to use all the features of this script in [the wiki](https://g
 
 ## Contributors
 
-### [Berlin]: [Edge](https://github.com/xb3rlinz)
+### Modders: [Berlin](https://github.com/xb3rlinz)
