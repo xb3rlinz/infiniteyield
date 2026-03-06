@@ -9,16 +9,16 @@ _G.loaddex      = false  -- default
 ```
 ---
 ## Keys
-### `_G.notification`
-**Default:** `true`
-
-Shows a notification when scripts are done loading, listing what was loaded (e.g. `"Infy & DarkDex Loaded!"`). Set to `false` to disable.
-
----
 ### `_G.loadinfytest` (not recommended)
 **Default:** `false`
 
 Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if both are set.
+
+---
+### `_G.notification`
+**Default:** `true`
+
+Shows a notification when scripts are done loading, listing what was loaded (e.g. `"Infy & DarkDex Loaded!"`). Set to `false` to disable.
 
 ---
 ### `_G.silentload`
