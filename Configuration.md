@@ -36,7 +36,7 @@ Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if bo
 ### `_G.loadexec`
 **Default:** `false`
 
-Loads the executor module.
+Loads in-game executor.
 
 ---
 ### `_G.loaddex`
