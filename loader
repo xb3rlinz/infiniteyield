@@ -1,21 +1,35 @@
-if loadinfy then
-	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()end)
-	isHidden = true 
-	wasStayOpen = StayOpen 
-	if StayOpen == true then 
-		StayOpen = false 
-		On.BackgroundTransparency = 1
-	end 
-	minimizeNum = 0 minimizeHolder()
-	if notification then 
-		notify('Loaded')
-	end
-end
+local infylogic = loadinfy or not (loaddex or loadexec)
 
+if infylogic then
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
+    end)
+end
 if loadexec then
-	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua"))()end)
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/executor.lua"))()
+    end)
+end
+if loaddex then
+    pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/dex.lua"))()
+    end)
 end
 
-if loaddex then
-	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()end)
+if notification then
+    if infylogic and loaddex and loadexec then
+        notify('All Loaded!')
+    elseif infylogic and loaddex then
+        notify('Infy & DarkDex Loaded!')
+    elseif infylogic and loadexec then
+        notify('Infy & Exec Loaded!')
+    elseif loaddex and loadexec then
+        notify('DarkDex & Exec Loaded!')
+    elseif infylogic then
+        notify('Infy Loaded!')
+    elseif loaddex then
+        notify('DarkDex Loaded!')
+    elseif loadexec then
+        notify('Exec Loaded!')
+    end
 end
