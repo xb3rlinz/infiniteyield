@@ -36,7 +36,7 @@ Loads the test branch of Infinite Yield. Takes priority over `_G.loadinfy` if bo
 ### `_G.loadexec`
 **Default:** `false`
 
-Loads in-game [executor](https://github.com/xb3rlinz/infiniteyieldbackup/blob/main/executor.lua).
+Loads in-game [executor](https://github.com/xb3rlinz/infiniteyieldbackup/blob/main/executor.lua)
 
 ---
 ### `_G.loaddex`
