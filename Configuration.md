@@ -13,6 +13,7 @@ _G.loaddex      = false  -- default
 **Default:** `true`
 
 Shows a notification when scripts are done loading, listing what was loaded (e.g. `"Infy & DarkDex Loaded!"`). Set to `false` to disable.
+
 ---
 ### `_G.loadinfytest` (not recommended)
 **Default:** `false`
