@@ -1,4 +1,6 @@
 # Infinite Yield (Modified)
+## Usage
+Learn how to use this script in the [Wiki](https://github.com/EdgeIY/infiniteyield/wiki), or check [Configuration](https://github.com/xb3rlinz/infiniteyield/blob/master/Configuration.md) for loader options.
 This repository provides a modified version of Infinite Yield with additional commands and improvements.
 ```luau
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
@@ -6,8 +8,6 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 * Currently 400 commands
 * Open source
 * 8+ years of development
-## Usage
-Learn how to use this script in the [Wiki](https://github.com/EdgeIY/infiniteyield/wiki), or check [Configuration](https://github.com/xb3rlinz/infiniteyield/blob/master/Configuration.md) for loader options.
 ## OG Developers
 **Creator:**
 [Edge](https://github.com/EdgeIY)
