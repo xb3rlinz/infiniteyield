@@ -1,6 +1,6 @@
 # Infinite Yield (Modified)
 
-This fork includes additional commands and modifications while maintaining compatibility with the original Infinite Yield command system.
+This repository provides a modified version of Infinite Yield with additional commands and improvements.
 
 ```luau
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
