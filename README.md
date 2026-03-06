@@ -8,7 +8,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 * 8+ years of development
 
 ## Usage
-Learn how to use this script in the [Wiki](https://github.com/EdgeIY/infiniteyield/wiki), or check [Configuration](https://github.com/xb3rlinz/infiniteyield/blob/master/Configuration.md) for loader options.
+Learn how to use this script in the [Wiki](https://github.com/EdgeIY/infiniteyield/wiki) or check [Configuration](https://github.com/xb3rlinz/infiniteyield/blob/master/Configuration.md) for loader options.
 
 ## Contributors
 **Maintainer:**
