@@ -42,7 +42,7 @@ Loads in-game [executor](https://github.com/xb3rlinz/infiniteyieldbackup/blob/ma
 ### `_G.loaddex`
 **Default:** `false`
 
-Loads [DarkDex](https://github.com/xb3rlinz/infiniteyieldbackup/blob/main/dex.lua) — a game explorer and instance viewer.
+Loads [DarkDex](https://github.com/LorekeeperZinnia/Dex)
 
 ---
 ## Example
