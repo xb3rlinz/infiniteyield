@@ -1,8 +1,8 @@
 local notification  = _G.notification or true
 local loadinfy      = _G.loadinfy or false
-local loadinfytest  = _G.loadinfytest false
-local loadexec      = _G.loadexec false
-local loaddex       = _G.loaddex false
+local loadinfytest  = _G.loadinfytest or false
+local loadexec      = _G.loadexec or false
+local loaddex       = _G.loaddex or false
 local infylogic     = (loadinfy or loadinfytest) or not (loaddex or loadexec)
 
 local function notifyLoaded()
