@@ -6504,7 +6504,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("print('g')")
+		queueteleport([[pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()end)]])
 	end
 end)
 
@@ -13372,4 +13372,4 @@ if isHidden then
     minimizeNum = 0
 end
 
-minimizeHolder()
+minimizeHolder()    
