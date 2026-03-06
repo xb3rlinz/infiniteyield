@@ -1,3 +1,4 @@
+_G.silentload = true
 if IY_LOADED and not _G.IY_DEBUG then
 	-- error("Infinite Yield is already running!", 0)
 	return
@@ -131,13 +132,13 @@ end
 
 if makefolder and isfolder and writefile and isfile then
 	pcall(function() -- good executor trust
-		local assets = "https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/"
+		local assets = "https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/"
 		for _, folder in {"infiniteyield", "infiniteyield/assets"} do
 			if not isfolder(folder) then
 				makefolder(folder)
 			end
 		end
-		for path in iyassets do
+		for path in pairs(iyassets) do
 			if not isfile(path) then
 				writefile(path, game:HttpGet((path:gsub("infiniteyield/", assets))))
 			end
@@ -2875,7 +2876,7 @@ reference = (function()
 		{113,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Header",Parent={112},Position=UDim2.new(0,8,0,5),Size=UDim2.new(1,-8,0,20),Text="Get Further Help",TextColor3=Color3.new(1,1,1),TextSize=20,TextXAlignment=0,ZIndex=10,}},
 		{114,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={112},Position=UDim2.new(0,8,0,30),Size=UDim2.new(1,-8,0,32),Text="You can join the Discord server to get support with IY,  and read up on more documentation such as the Plugin API.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,ZIndex=10,}},
 		{115,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="Line",Parent={112},Position=UDim2.new(0,10,1,-1),Size=UDim2.new(1,-20,0,1),Visible=false,ZIndex=10,}},
-		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://discord.gg/78ZuWSq)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
+		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
 	})
 	for i,v in pairs(main.Content.List:GetDescendants()) do
 		if v:IsA("TextLabel") then
@@ -2893,16 +2894,16 @@ reference = (function()
 	local lastPress = nil
 	inviteButton.MouseButton1Click:Connect(function()
 		if everyClipboard then
-			toClipboard("https://discord.gg/78ZuWSq")
+			toClipboard("https://discord.com/vanityurl/dotcom/steakpants/flour/flower/index11.html")
 			inviteButton.Text = "Copied"
 		else
-			inviteButton.Text = "No Clipboard Function, type out the link"
+			inviteButton.Text = "No Clipboard Function"
 		end
 		local pressTime = tick()
 		lastPress = pressTime
 		wait(2)
 		if lastPress ~= pressTime then return end
-		inviteButton.Text = "Copy Discord Invite Link (https://discord.gg/78ZuWSq)"
+		inviteButton.Text = "Copy Discord Invite Link"
 	end)
 	dragGUI(main)
 	main.Parent = ScaledHolder
@@ -2921,7 +2922,12 @@ currentScroll = Color3.fromRGB(78,78,79)
 
 defaultGuiScale = IsOnMobile and 0.9 or 1
 defaultsettings = {
-	prefix = ';';
+	prefix = [[\]];
+	silentloadconf = _G.silentload or false;
+	notification = _G.notification or true;
+	loadinfy = _G.loadinfy or false;
+	loadexec = _G.loadexec or false;
+	loaddex = _G.loaddex or false;
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.3;
@@ -2944,7 +2950,12 @@ defaultsettings = {
 defaults = HttpService:JSONEncode(defaultsettings)
 nosaves = false
 useFactorySettings = function()
-	prefix = ';'
+	prefix = [[\]]
+	silentloadconf = _G.silentload or false
+	notification = _G.notification or true
+	loadinfy = _G.loadinfy or false
+	loadexec = _G.loadexec or false
+	loaddex = _G.loaddex or false
 	StayOpen = false
 	guiScale = defaultGuiScale
 	KeepInfYield = true
@@ -3051,7 +3062,12 @@ function saves()
 			if out ~= nil and tostring(out):gsub("%s", "") ~= "" then
 				local success, response = pcall(function()
 					local json = HttpService:JSONDecode(out)
-					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = ';' end
+					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = [[\]] end
+					if not _G.silentload then if vtype(json.silentloadconf, "boolean") then _G.silentload = json.silentloadconf else _G.silentload = false end end
+					if not _G.notification then if vtype(json.notification, "boolean") then _G.notification = json.notification else _G.notification = true end end
+					if not _G.loadinfy then if vtype(json.loadinfy, "boolean") then _G.loadinfy = json.loadinfy else _G.loadinfy = false end end
+					if not _G.loadexec then if vtype(json.loadexec, "boolean") then _G.loadexec = json.loadexec else _G.loadexec = false end end
+					if not _G.loaddex then if vtype(json.loaddex, "boolean") then _G.loaddex = json.loaddex else _G.loaddex = false end end
 					if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
 					if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
 					if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
@@ -3122,6 +3138,11 @@ function updatesaves()
 	if nosaves == false and writefileExploit() then
 		local update = {
 			prefix = prefix;
+			silentloadconf = _G.silentload or false;
+			notification = _G.notification or true;
+			loadinfy = _G.loadinfy or false;
+			loadexec = _G.loadexec or false;
+			loaddex = _G.loaddex or false;
 			StayOpen = StayOpen;
 			guiScale = guiScale;
 			keepIY = KeepInfYield;
@@ -3182,7 +3203,8 @@ end
 
 PrefixBox.Text = prefix
 local SettingsOpen = false
-local isHidden = false
+local isHidden = _G.silentload
+print(isHidden)
 
 if StayOpen == false then
 	On.BackgroundTransparency = 1
@@ -3886,8 +3908,8 @@ On.MouseButton1Click:Connect(function()
 			StayOpen = true
 			On.BackgroundTransparency = 0
 		else
-			StayOpen = false
 			On.BackgroundTransparency = 1
+			StayOpen = false
 		end
 		updatesaves()
 	end
@@ -6499,7 +6521,16 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/huh"))()")
+		queueteleport(string.format([[
+			_G.silentload = %s
+			_G.loadinfy = %s
+			_G.loadexec = %s
+			_G.loaddex = %s
+			_G.notification = %s
+			pcall(function()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
+			end)
+		]], tostring(_G.silentload), tostring(_G.loadinfy), tostring(_G.loadexec), tostring(_G.loaddex), tostring(_G.notification)))
 	end
 end)
 
@@ -6546,10 +6577,10 @@ end)
 
 addcmd('discord', {'support', 'help'}, function(args, speaker)
 	if everyClipboard then
-		toClipboard('https://discord.com/invite/78ZuWSq')
-		notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/78ZuWSq')
+		toClipboard('https://discord.com/vanityurl/dotcom/steakpants/flour/flower/index11.html')
+		notify('Discord Invite', 'Copied to clipboard!')
 	else
-		notify('Discord Invite', 'discord.gg/78ZuWSq')
+		notify('Failed to copy', 'Get a better exec.')
 	end
 	if httprequest then
 		httprequest({
@@ -6560,9 +6591,9 @@ addcmd('discord', {'support', 'help'}, function(args, speaker)
 				Origin = 'https://discord.com'
 			},
 			Body = HttpService:JSONEncode({
-				cmd = 'INVITE_BROWSER',
+				cmd = 'BROWSER_HANDOFF',
 				nonce = HttpService:GenerateGUID(false),
-				args = {code = '78ZuWSq'}
+				args = {url = 'https://discord.com/vanityurl/dotcom/steakpants/flour/flower/index11.html'}
 			})
 		})
 	end
@@ -7795,8 +7826,8 @@ addcmd('hideiy',{},function(args, speaker)
 	isHidden = true
 	wasStayOpen = StayOpen
 	if StayOpen == true then
-		StayOpen = false
 		On.BackgroundTransparency = 1
+		StayOpen = false
 	end
 	minimizeNum = 0
 	minimizeHolder()
@@ -8760,7 +8791,7 @@ addcmd("btools", {}, function(args, speaker)
 end)
 
 addcmd("f3x", {"fex"}, function(args, speaker)
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/f3x.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/f3x.lua"))()
 end)
 
 addcmd("partpath", {"partname"}, function(args, speaker)
@@ -8826,7 +8857,7 @@ addcmd("promptr15", {}, function(args, speaker)
 end)
 
 addcmd("wallwalk", {"walkonwalls"}, function(args, speaker)
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/wallwalker.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/wallwalker.lua"))()
 end)
 
 addcmd('age',{},function(args, speaker)
@@ -10423,7 +10454,7 @@ addcmd('oldconsole',{},function(args, speaker)
 	-- Thanks wally!!
 	notify("Loading",'Hold on a sec')
 	local _, str = pcall(function()
-		return game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/console.lua", true)
+		return game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/console.lua", true)
 	end)
 
 	local s, e = loadstring(str)
@@ -10445,7 +10476,7 @@ end)
 
 addcmd("explorer", {"dex"}, function(args, speaker)
 	notify("Loading", "Hold on a sec")
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/dex.lua"))()
 end)
 
 addcmd('olddex', {'odex'}, function(args, speaker)
@@ -10532,18 +10563,18 @@ addcmd('remotespy',{'rspy'},function(args, speaker)
 	notify("Loading",'Hold on a sec')
 	-- Full credit to exx, creator of SimpleSpy
 	-- also thanks to Amity for fixing
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/SimpleSpyV3/main.lua"))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/SimpleSpyV3/main.lua"))()
 end)
 
 addcmd("executor", {}, function(args, speaker)
     -- by dnezero
     notify("Loading", "Hold on a sec")
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/executor.lua"))()
 end)
 
 addcmd('audiologger',{'alogger'},function(args, speaker)
 	notify("Loading",'Hold on a sec')
-	loadstring(game:HttpGet(('https://raw.githubusercontent.com/infyiff/backup/main/audiologger.lua'),true))()
+	loadstring(game:HttpGet(('https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/audiologger.lua'),true))()
 end)
 
 local loopgoto = nil
@@ -13355,3 +13386,12 @@ task.spawn(function()
     IntroBackground:Destroy()
     minimizeHolder()
 end)
+
+if isHidden then
+    wasStayOpen = StayOpen
+    if StayOpen == true then
+		On.BackgroundTransparency = 1
+        StayOpen = false
+    end
+    minimizeNum = 0
+end
