@@ -1,6 +1,3 @@
-if loadexec then
-	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua"))()end)
-end
 if loadinfy then
 	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()end)
 	isHidden = true 
@@ -14,6 +11,11 @@ if loadinfy then
 		notify('Loaded')
 	end
 end
+
+if loadexec then
+	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/executor.lua"))()end)
+end
+
 if loaddex then
 	pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/infyiff/backup/main/dex.lua"))()end)
 end
