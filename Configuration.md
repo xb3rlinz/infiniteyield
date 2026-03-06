@@ -50,5 +50,6 @@ Loads [DarkDex](https://github.com/LorekeeperZinnia/Dex)
 _G.notification = true
 _G.silentload   = true
 _G.loaddex      = true
+
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
 ```
