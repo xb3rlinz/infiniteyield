@@ -137,7 +137,7 @@ if makefolder and isfolder and writefile and isfile then
 				makefolder(folder)
 			end
 		end
-		for path in iyassets do
+		for path in pairs(iyassets) do
 			if not isfile(path) then
 				writefile(path, game:HttpGet((path:gsub("infiniteyield/", assets))))
 			end
@@ -2921,7 +2921,8 @@ currentScroll = Color3.fromRGB(78,78,79)
 
 defaultGuiScale = IsOnMobile and 0.9 or 1
 defaultsettings = {
-	prefix = '\';
+	prefix = [[\]];
+	silentloadconf = silentload or false;
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.3;
@@ -2944,7 +2945,8 @@ defaultsettings = {
 defaults = HttpService:JSONEncode(defaultsettings)
 nosaves = false
 useFactorySettings = function()
-	prefix = ';'
+	prefix = [[\]]
+	silentloadconf = silentload or false
 	StayOpen = false
 	guiScale = defaultGuiScale
 	KeepInfYield = true
@@ -3051,7 +3053,8 @@ function saves()
 			if out ~= nil and tostring(out):gsub("%s", "") ~= "" then
 				local success, response = pcall(function()
 					local json = HttpService:JSONDecode(out)
-					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = ';' end
+					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = [[\]] end
+					if vtype(json.silentloadconf, "boolean") then silentload = json.silentloadconf else silentload = false end
 					if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
 					if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
 					if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
@@ -3122,6 +3125,7 @@ function updatesaves()
 	if nosaves == false and writefileExploit() then
 		local update = {
 			prefix = prefix;
+			silentloadconf = silentload or false;
 			StayOpen = StayOpen;
 			guiScale = guiScale;
 			keepIY = KeepInfYield;
@@ -3182,7 +3186,7 @@ end
 
 PrefixBox.Text = prefix
 local SettingsOpen = false
-local isHidden = false
+local isHidden = silentload
 
 if StayOpen == false then
 	On.BackgroundTransparency = 1
@@ -3886,8 +3890,8 @@ On.MouseButton1Click:Connect(function()
 			StayOpen = true
 			On.BackgroundTransparency = 0
 		else
-			StayOpen = false
 			On.BackgroundTransparency = 1
+			StayOpen = false
 		end
 		updatesaves()
 	end
@@ -6500,8 +6504,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		_G.f9430kf349kk34f9 = "working fine baby"
-		queueteleport("print(_G.f9430kf349kk34f9)")
+		queueteleport("print('g')")
 	end
 end)
 
@@ -7797,8 +7800,8 @@ addcmd('hideiy',{},function(args, speaker)
 	isHidden = true
 	wasStayOpen = StayOpen
 	if StayOpen == true then
-		StayOpen = false
 		On.BackgroundTransparency = 1
+		StayOpen = false
 	end
 	minimizeNum = 0
 	minimizeHolder()
@@ -13340,6 +13343,7 @@ task.spawn(function()
 	end
 end)
 
+--[[
 task.spawn(function()
     task.wait()
     pcall(function()
@@ -13357,3 +13361,15 @@ task.spawn(function()
     IntroBackground:Destroy()
     minimizeHolder()
 end)
+]]
+
+if isHidden then
+    wasStayOpen = StayOpen
+    if StayOpen == true then
+		On.BackgroundTransparency = 1
+        StayOpen = false
+    end
+    minimizeNum = 0
+end
+
+minimizeHolder()
