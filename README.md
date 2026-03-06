@@ -8,7 +8,6 @@ _G.silentload = true
 _G.loadinfy = true
 _G.loadexec = false
 _G.loaddex = false
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
 ```
 
