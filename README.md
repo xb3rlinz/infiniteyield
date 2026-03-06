@@ -2,8 +2,7 @@
 
 ## About
 
-Infinite Yield is a client-side admin command console for Roblox that provides hundreds of utility commands for movement, debugging, and player interaction.
-
+Infinite Yield is an open-source admin commands script created by Edge, Zwolf, and Moon.
 This fork includes additional commands and modifications while maintaining compatibility with the original Infinite Yield command system.
 
 ```lua
