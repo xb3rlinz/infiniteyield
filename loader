@@ -1,3 +1,4 @@
+local loadinfy, loadinfytest, loaddex, loadexec, disnoti
 local infylogic = (loadinfy loadinfytest) or not (loaddex or loadexec)
 
 if infylogic then
