@@ -1,9 +1,17 @@
-local infylogic = loadinfy or not (loaddex or loadexec)
+local infylogic = (loadinfy loadinfytest) or not (loaddex or loadexec)
 
 if infylogic then
-    pcall(function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
-    end)
+    if loadinfy and not loadinfytest then
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
+        end)
+    elseif loadinfytest and not loadinfy then
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/test"))()
+        end)
+    else
+        print('[InfyLoad] Error: Conflicting options detected. `loadinfy` and `loadinfytest` cannot both be enabled simultaneously.')
+    end
 end
 if loadexec then
     pcall(function()
