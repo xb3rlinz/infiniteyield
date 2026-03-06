@@ -1,37 +1,32 @@
-local notification  = _G.notification or true
-local loadinfy      = _G.loadinfy or false
-local loadinfytest  = _G.loadinfytest or false
-local loadexec      = _G.loadexec or false
-local loaddex       = _G.loaddex or false
-local infylogic     = (loadinfy or loadinfytest) or not (loaddex or loadexec)
+local infylogic = (_G.loadinfy or _G.loadinfytest) or not (_G.loaddex or _G.loadexec)
 
 local function notifyLoaded()
-    if not notification then return end
+    if not _G.notification then return end
     local parts = {}
     if infylogic then parts[#parts + 1] = "Infy" end
-    if loaddex    then parts[#parts + 1] = "DarkDex" end
-    if loadexec   then parts[#parts + 1] = "Exec" end
+    if _G.loaddex then parts[#parts + 1] = "DarkDex" end
+    if _G.loadexec then parts[#parts + 1] = "Exec" end
     if #parts > 0 then notify(table.concat(parts, " & ") .. " Loaded!") end
 end
 
 if infylogic then
     pcall(function()
-        local url = (loadinfytest and not loadinfy)
+        local url = (_G.loadinfytest and not _G.loadinfy)
             and "https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/test"
-            or  "https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/source"
+            or "https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/source"
         loadstring(game:HttpGet(url))()
         notifyLoaded()
     end)
 end
 
-if loadexec then
+if _G.loadexec then
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/refs/heads/main/executor.lua"))()
         notifyLoaded()
     end)
 end
 
-if loaddex then
+if _G.loaddex then
     pcall(function()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyieldbackup/main/dex.lua"))()
         notifyLoaded()
