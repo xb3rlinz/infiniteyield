@@ -17,20 +17,20 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 ## Contributors
 
 **Maintainer:**
-[Berlin](https://github.com/xb3rlinz)
+### [Berlin](https://github.com/xb3rlinz)
 
 ## OG Developers
 
 **Creator:**
-[Edge](https://github.com/EdgeIY)
+### [Edge](https://github.com/EdgeIY)
 
 **Developers:**
-[Moon](https://github.com/LorekeeperZinnia),
-[Zwolf](https://github.com/luatsuki),
-[Hunter](https://github.com/tooslzy),
-[Toon](https://github.com/Toon-arch),
-[Peyton](https://github.com/peyton2465),
-[ATP](https://github.com/ionizedparticle)
+### [Moon](https://github.com/LorekeeperZinnia),
+### [Zwolf](https://github.com/luatsuki),
+### [Hunter](https://github.com/tooslzy),
+### [Toon](https://github.com/Toon-arch),
+### [Peyton](https://github.com/peyton2465),
+### [ATP](https://github.com/ionizedparticle)
 
 ## Usage
 
