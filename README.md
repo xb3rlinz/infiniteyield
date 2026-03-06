@@ -2,8 +2,6 @@
 
 ## About
 
-Infinite Yield is an open-source admin commands script created by Edge, Zwolf, and Moon.
-
 This fork includes additional commands and modifications while maintaining compatibility with the original Infinite Yield command system.
 
 ```lua
