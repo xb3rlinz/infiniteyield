@@ -6,6 +6,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 * Currently 400 commands
 * Open source
 * 8+ years of development
+* [Configuration](https://github.com/xb3rlinz/infiniteyield/blob/master/Configuration.md)
 ## Contributors
 **Maintainer:**
 [Berlin](https://github.com/xb3rlinz)
