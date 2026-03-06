@@ -24,7 +24,7 @@ Suppresses any UI or side effects from the loader.
 ### `_G.loadinfy`
 **Default:** `true`
 
-Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield). Use `_G.loadinfytest` instead for the test branch.
+Loads [Infinite Yield](https://github.com/xb3rlinz/infiniteyield)
 
 ---
 ### `_G.loadinfytest`
