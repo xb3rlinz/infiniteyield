@@ -35,4 +35,4 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 ## Usage
 
 You can learn how to use all the features of this script in the
-[Infinite Yield Wiki](https://github.com/EdgeIY/infiniteyield/wiki)!
+[Infinite Yield Wiki](https://github.com/EdgeIY/infiniteyield/wiki) !
