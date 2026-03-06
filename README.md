@@ -1,6 +1,10 @@
-# Infinite Yield (modified)
+# Infinite Yield (Modified)
 
-</a> The best command line script for roblox.
+<a> Infinite Yield is a client-side admin command console for Roblox that provides
+hundreds of utility commands for movement, debugging, and player interaction.
+
+This fork includes additional commands and modifications while maintaining
+compatibility with the original Infinite Yield command system. </a>
 
 ```lua
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
@@ -12,7 +16,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyiel
 
 ## Contributors
 
-- [Berlin](https://github.com/xb3rlinz)
+### The One And Only: [Berlin](https://github.com/xb3rlinz)
 
 ## OG Developers
 
