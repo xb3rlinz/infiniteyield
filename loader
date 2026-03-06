@@ -22,7 +22,7 @@ if loaddex then
     end)
 end
 
-if notification then
+if not disnoti then
     if infylogic and loaddex and loadexec then
         notify('All Loaded!')
     elseif infylogic and loaddex then
