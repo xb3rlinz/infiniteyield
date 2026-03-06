@@ -3,12 +3,6 @@
 This repository provides a modified version of Infinite Yield with additional commands and improvements.
 
 ```luau
-_G.notification = false
-_G.silentload = true
-_G.loadinfy = true
-_G.loadexec = false
-_G.loaddex = false
-
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
 ```
 
