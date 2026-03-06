@@ -2,7 +2,7 @@
 
 This fork includes additional commands and modifications while maintaining compatibility with the original Infinite Yield command system.
 
-```lua
+```luau
 loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/master/source"))()
 ```
 
