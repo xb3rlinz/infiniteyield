@@ -13356,10 +13356,6 @@ task.spawn(function()
         Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
         task.wait(0.2)
     end)
-    Logo:Destroy()
-    Credits:Destroy()
-    IntroBackground:Destroy()
-    minimizeHolder()
 end)
 ]]
 
@@ -13372,4 +13368,7 @@ if isHidden then
     minimizeNum = 0
 end
 
-minimizeHolder()    
+Logo:Destroy()
+Credits:Destroy()
+IntroBackground:Destroy()
+minimizeHolder()
