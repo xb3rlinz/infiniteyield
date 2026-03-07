@@ -1,9 +1,3 @@
-_G.notification = false
-_G.silentload = true
-_G.loadinfy = true
-_G.loadexec = false
-_G.loaddex = false
-
 local infylogic = (_G.loadinfy or _G.loadinfytest) 
     or (_G.loadinfy == nil and not (_G.loaddex or _G.loadexec))
 local notified = false
