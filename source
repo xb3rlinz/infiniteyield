@@ -3064,11 +3064,11 @@ function saves()
 				local success, response = pcall(function()
 					local json = HttpService:JSONDecode(out)
 					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = [[\]] end
-					if not _G.silentload then if vtype(json.silentloadconf, "boolean") then _G.silentload = json.silentloadconf else _G.silentload = false end end
+					if _G.silentload == nil then if vtype(json.silentloadconf, "boolean") then _G.silentload = json.silentloadconf else _G.silentload = false end end
 					if _G.notification == nil then if vtype(json.notification, "boolean") then _G.notification = json.notification else _G.notification = true end end
-					if not _G.loadinfy then if vtype(json.loadinfy, "boolean") then _G.loadinfy = json.loadinfy else _G.loadinfy = false end end
-					if not _G.loadexec then if vtype(json.loadexec, "boolean") then _G.loadexec = json.loadexec else _G.loadexec = false end end
-					if not _G.loaddex then if vtype(json.loaddex, "boolean") then _G.loaddex = json.loaddex else _G.loaddex = false end end
+					if _G.loadinfy == nil then if vtype(json.loadinfy, "boolean") then _G.loadinfy = json.loadinfy else _G.loadinfy = false end end
+					if _G.loadexec == nil then if vtype(json.loadexec, "boolean") then _G.loadexec = json.loadexec else _G.loadexec = false end end
+					if _G.loaddex == nil then if vtype(json.loaddex, "boolean") then _G.loaddex = json.loaddex else _G.loaddex = false end end
 					if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
 					if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
 					if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
