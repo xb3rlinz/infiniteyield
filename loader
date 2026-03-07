@@ -1,4 +1,11 @@
-local infylogic = (_G.loadinfy or _G.loadinfytest) or not (_G.loaddex or _G.loadexec)
+_G.notification = false
+_G.silentload = true
+_G.loadinfy = true
+_G.loadexec = false
+_G.loaddex = false
+
+local infylogic = (_G.loadinfy or _G.loadinfytest) 
+    or (_G.loadinfy == nil and not (_G.loaddex or _G.loadexec))
 local notified = false
 
 local function notifyLoaded()
@@ -8,7 +15,7 @@ local function notifyLoaded()
     if infylogic then parts[#parts + 1] = "Infy" end
     if _G.loaddex then parts[#parts + 1] = "DarkDex" end
     if _G.loadexec then parts[#parts + 1] = "Exec" end
-    if #parts > 0 then notify(table.concat(parts, " & ") .. " Loaded!") end
+    if #parts > 0 then notify("Loaded", table.concat(parts, " & ") .. " Loaded!") end
 end
 
 if infylogic then
