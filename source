@@ -2930,6 +2930,8 @@ defaultsettings = {
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.3;
+	espEnabled = false;
+	chmsEnabled = false;
 	keepIY = true;
 	logsEnabled = false;
 	jLogsEnabled = false;
@@ -3071,6 +3073,8 @@ function saves()
 					if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
 					if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
 					if vtype(json.espTransparency, "number") then espTransparency = json.espTransparency else espTransparency = 0.3 end
+					if vtype(json.espEnabled, "boolean") then _G._IY_loadedESP = json.espEnabled end
+					if vtype(json.chmsEnabled, "boolean") then _G._IY_loadedCHMS = json.chmsEnabled end
 					if vtype(json.logsEnabled, "boolean") then logsEnabled = json.logsEnabled else logsEnabled = false end
 					if vtype(json.jLogsEnabled, "boolean") then jLogsEnabled = json.jLogsEnabled else jLogsEnabled = false end
 					if vtype(json.logsWebhook, "string") then logsWebhook = json.logsWebhook else logsWebhook = nil end
@@ -3146,6 +3150,8 @@ function updatesaves()
 			guiScale = guiScale;
 			keepIY = KeepInfYield;
 			espTransparency = espTransparency;
+			espEnabled = ESPenabled;
+			chmsEnabled = CHMSenabled;
 			logsEnabled = logsEnabled;
 			jLogsEnabled = jLogsEnabled;
 			logsWebhook = logsWebhook;
@@ -5729,6 +5735,32 @@ end)
 
 ESPenabled = false
 CHMSenabled = false
+
+-- Restore saved ESP/CHAMS state and re-apply to current players
+if _G._IY_loadedESP == true then
+	ESPenabled = true
+	task.spawn(function()
+		for _, v in pairs(Players:GetPlayers()) do
+			if v ~= Players.LocalPlayer then
+				repeat task.wait(0.5) until v.Character and getRoot(v.Character)
+				ESP(v)
+			end
+		end
+	end)
+	_G._IY_loadedESP = nil
+end
+if _G._IY_loadedCHMS == true then
+	CHMSenabled = true
+	task.spawn(function()
+		for _, v in pairs(Players:GetPlayers()) do
+			if v ~= Players.LocalPlayer then
+				repeat task.wait(0.5) until v.Character and getRoot(v.Character)
+				CHMS(v)
+			end
+		end
+	end)
+	_G._IY_loadedCHMS = nil
+end
 
 function round(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
