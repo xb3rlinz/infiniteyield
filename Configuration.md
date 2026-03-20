@@ -1,5 +1,5 @@
 # Configuration
-Set these globals before running the script.
+Place these globals above the loader.
 ```lua
 _G.notification = true   -- default
 _G.silentload   = false  -- default
