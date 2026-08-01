@@ -1,5 +1,5 @@
 if IY_LOADED and not _G.IY_DEBUG then
-	-- error("Infinite Yield is already running!", 0)
+	error("Infinite Yield is already running!", 0)
 	return
 end
 
@@ -2922,10 +2922,16 @@ currentScroll = Color3.fromRGB(78,78,79)
 defaultGuiScale = IsOnMobile and 0.9 or 1
 defaultsettings = {
 	prefix = [[\]];
-	silentloadconf = silentload or false;
+	silentloadconf = _G.silentload or false;
+	notification = _G.notification ~= nil and _G.notification or true;
+	loadinfy = _G.loadinfy or false;
+	loadexec = _G.loadexec or false;
+	loaddex = _G.loaddex or false;
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.3;
+	espEnabled = false;
+	chmsEnabled = false;
 	keepIY = true;
 	logsEnabled = false;
 	jLogsEnabled = false;
@@ -2946,7 +2952,11 @@ defaults = HttpService:JSONEncode(defaultsettings)
 nosaves = false
 useFactorySettings = function()
 	prefix = [[\]]
-	silentloadconf = silentload or false
+	silentloadconf = _G.silentload or false
+	notification = _G.notification ~= nil and _G.notification or true
+	loadinfy = _G.loadinfy or false
+	loadexec = _G.loadexec or false
+	loaddex = _G.loaddex or false
 	StayOpen = false
 	guiScale = defaultGuiScale
 	KeepInfYield = true
@@ -3054,11 +3064,17 @@ function saves()
 				local success, response = pcall(function()
 					local json = HttpService:JSONDecode(out)
 					if vtype(json.prefix, "string") then prefix = json.prefix else prefix = [[\]] end
-					if vtype(json.silentloadconf, "boolean") then silentload = json.silentloadconf else silentload = false end
+					if _G.silentload == nil then if vtype(json.silentloadconf, "boolean") then _G.silentload = json.silentloadconf else _G.silentload = false end end
+					if _G.notification == nil then if vtype(json.notification, "boolean") then _G.notification = json.notification else _G.notification = true end end
+					if _G.loadinfy == nil then if vtype(json.loadinfy, "boolean") then _G.loadinfy = json.loadinfy else _G.loadinfy = false end end
+					if _G.loadexec == nil then if vtype(json.loadexec, "boolean") then _G.loadexec = json.loadexec else _G.loadexec = false end end
+					if _G.loaddex == nil then if vtype(json.loaddex, "boolean") then _G.loaddex = json.loaddex else _G.loaddex = false end end
 					if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
 					if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
 					if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
 					if vtype(json.espTransparency, "number") then espTransparency = json.espTransparency else espTransparency = 0.3 end
+					if vtype(json.espEnabled, "boolean") then _G._IY_loadedESP = json.espEnabled end
+					if vtype(json.chmsEnabled, "boolean") then _G._IY_loadedCHMS = json.chmsEnabled end
 					if vtype(json.logsEnabled, "boolean") then logsEnabled = json.logsEnabled else logsEnabled = false end
 					if vtype(json.jLogsEnabled, "boolean") then jLogsEnabled = json.jLogsEnabled else jLogsEnabled = false end
 					if vtype(json.logsWebhook, "string") then logsWebhook = json.logsWebhook else logsWebhook = nil end
@@ -3125,11 +3141,17 @@ function updatesaves()
 	if nosaves == false and writefileExploit() then
 		local update = {
 			prefix = prefix;
-			silentloadconf = silentload or false;
+			silentloadconf = _G.silentload or false;
+			notification = _G.notification ~= nil and _G.notification or true;
+			loadinfy = _G.loadinfy or false;
+			loadexec = _G.loadexec or false;
+			loaddex = _G.loaddex or false;
 			StayOpen = StayOpen;
 			guiScale = guiScale;
 			keepIY = KeepInfYield;
 			espTransparency = espTransparency;
+			espEnabled = ESPenabled;
+			chmsEnabled = CHMSenabled;
 			logsEnabled = logsEnabled;
 			jLogsEnabled = jLogsEnabled;
 			logsWebhook = logsWebhook;
@@ -3186,7 +3208,7 @@ end
 
 PrefixBox.Text = prefix
 local SettingsOpen = false
-local isHidden = silentload
+local isHidden = _G.silentload
 
 if StayOpen == false then
 	On.BackgroundTransparency = 1
@@ -5714,6 +5736,32 @@ end)
 ESPenabled = false
 CHMSenabled = false
 
+-- Restore saved ESP/CHAMS state and re-apply to current players
+if _G._IY_loadedESP == true then
+	ESPenabled = true
+	task.spawn(function()
+		for _, v in pairs(Players:GetPlayers()) do
+			if v ~= Players.LocalPlayer then
+				repeat task.wait(0.5) until v.Character and getRoot(v.Character)
+				ESP(v)
+			end
+		end
+	end)
+	_G._IY_loadedESP = nil
+end
+if _G._IY_loadedCHMS == true then
+	CHMSenabled = true
+	task.spawn(function()
+		for _, v in pairs(Players:GetPlayers()) do
+			if v ~= Players.LocalPlayer then
+				repeat task.wait(0.5) until v.Character and getRoot(v.Character)
+				CHMS(v)
+			end
+		end
+	end)
+	_G._IY_loadedCHMS = nil
+end
+
 function round(num, numDecimalPlaces)
 	local mult = 10^(numDecimalPlaces or 0)
 	return math.floor(num * mult + 0.5) / mult
@@ -6499,12 +6547,20 @@ Close_4.MouseButton1Click:Connect(function()
 	PluginsFrame:TweenPosition(UDim2.new(0, 0, 0, 175), "InOut", "Quart", 0.5, true, nil)
 end)
 
--- TODO: Change loadstring link
 local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport([[pcall(function()loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()end)]])
+		queueteleport(string.format([[
+			_G.silentload = %s
+			_G.loadinfy = %s
+			_G.loadexec = %s
+			_G.loaddex = %s
+			_G.notification = %s
+			pcall(function()
+				loadstring(game:HttpGet("https://raw.githubusercontent.com/xb3rlinz/infiniteyield/refs/heads/master/loader"))()
+			end)
+		]], tostring(_G.silentload), tostring(_G.loadinfy), tostring(_G.loadexec), tostring(_G.loaddex), tostring(_G.notification)))
 	end
 end)
 
@@ -6948,11 +7004,11 @@ end)
 
 addcmd("rejoin", {"rj"}, function(args, speaker)
 	if #Players:GetPlayers() <= 1 then
-		Players.LocalPlayer:Kick("\nRejoining...")
+		Players.LocalPlayer:Kick("Rejoining...")
 		wait()
 		TeleportService:Teleport(PlaceId, Players.LocalPlayer)
 	else
-		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+		TeleportService:TeleportReconnect()
 	end
 end)
 
@@ -13343,7 +13399,6 @@ task.spawn(function()
 	end
 end)
 
---[[
 task.spawn(function()
     task.wait()
     pcall(function()
@@ -13356,8 +13411,11 @@ task.spawn(function()
         Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
         task.wait(0.2)
     end)
+    Logo:Destroy()
+    Credits:Destroy()
+    IntroBackground:Destroy()
+    minimizeHolder()
 end)
-]]
 
 if isHidden then
     wasStayOpen = StayOpen
@@ -13367,8 +13425,3 @@ if isHidden then
     end
     minimizeNum = 0
 end
-
-Logo:Destroy()
-Credits:Destroy()
-IntroBackground:Destroy()
-minimizeHolder()
